@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Curvas</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #c {
+            background-color: white;
+            display: block;
+            margin: 50px auto;
+            margin: calc(50vh - 150px) auto;
+            border: 1px solid #d9d9d9;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <canvas id="corazon">Su navegador no soporta canvas :(</canvas>
+    <script>
+        var c = document.getElementById("corazon");
+        var ctx = c.getContext("2d");
+        var cw = c.width = 250;
+        var ch = c.height = 250;
+        var cx = cw / 2,
+            cy = ch / 2;
+        var rad = Math.PI / 180;
+
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = "#6ab150";
+
+        var r = 5;
+        ctx.beginPath();
+        for (var t = 0; t < 360; t++) {
+            var x = cx + 16 * r * (Math.sin(t * rad) * Math.sin(t * rad) * Math.sin(t * rad));
+            var y = cy - 13 * r * Math.cos(t * rad) +
+                5 * r * Math.cos(2 * t * rad) +
+                2 * r * Math.cos(3 * t * rad) +
+                r * Math.cos(4 * t * rad);
+            ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.stroke();
+
+    </script>
+
+</body>
+
+</html>

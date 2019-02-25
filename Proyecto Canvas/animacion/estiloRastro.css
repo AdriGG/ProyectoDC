@@ -1,0 +1,21 @@
+$body-bg : #222;
+$canvas-bg: #000;
+$font1 : Arial,
+sans-serif;
+
+body {
+    background-color: $body-bg;
+    font-family: $font1;
+}
+
+canvas {
+    border: 1px solid black;
+    display: block;
+    margin: 0 auto;
+    margin: calc(50vh - 150px) auto 0;
+    background-color: $canvas-bg;
+}
+
+p {
+    text-align: center;
+}

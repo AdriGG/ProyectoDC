@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Gradiente Radial</title>
+
+</head>
+
+<body>
+    <canvas id="lienzo" width="250" height="255">Su navegador no soporta canvas :( </canvas>
+    <script>
+        var canvas = document.getElementById("lienzo");
+        if (canvas && canvas.getContext) {
+            var ctx = canvas.getContext("2d");
+            if (ctx) {
+                ctx.rect(0, 0, canvas.width, canvas.height);
+
+                var grd = ctx.createRadialGradient(80, 125, 25, 125, 125, 120); // x0, y0, r0, x1, y1, r1
+                grd.addColorStop(0, "#8df");
+                grd.addColorStop(1, "#04b");
+                ctx.fillStyle = grd;
+                ctx.fill();
+
+            }
+        }
+
+    </script>
+</body>
+
+</html>

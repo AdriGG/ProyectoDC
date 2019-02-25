@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Video</title>
+    <style>
+        canvas{border:1px solid}
+
+    </style>
+</head>
+
+<body>
+    <video id="vid" controls>
+        <source src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/222579/twitter_cat.mp4" type="video/mp4">
+    </video>
+    <canvas id="cnv">Tu navegador no soporta canvas</canvas>
+    <script>
+        let vid = document.getElementById("vid");
+        let canvas = document.getElementById("cnv");
+        let ctx = canvas.getContext("2d");
+        // damos al canvas la misma altura y anchyra que al video
+        let cw = (canvas.width = 360);
+        let ch = (canvas.height = 450);
+
+        vid.addEventListener(
+            "play", //si el video se esta reproduciendo
+            () => {
+                // dibujelo en el canvas
+                pintarVideo(vid, ctx, cw, ch);
+            },
+            false
+        );
+
+        function pintarVideo() {
+            requestAnimationFrame(pintarVideo);
+            // si el video esta parado o se ha acabado no hagas nada y sal de aquí
+            if (vid.paused || vid.ended) {
+                return;
+            }
+            // pinta el video en el canvas
+            ctx.drawImage(vid, 0, 0, cw, ch);
+        }
+
+    </script>
+</body>
+
+</html>

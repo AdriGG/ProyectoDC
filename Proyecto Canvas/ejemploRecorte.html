@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Region de recorte</title>
+
+</head>
+
+<body>
+    <canvas id="lienzo" width="250" height="240">Su navegador no soporta canvas :( </canvas>
+    <script>
+        var canvas = document.getElementById("lienzo");
+        if (canvas && canvas.getContext) {
+            var ctx = canvas.getContext("2d");
+            if (ctx) {
+                ctx.beginPath();
+                ctx.arc(125, 120, 100, 0, 2 * Math.PI);
+
+                ctx.clip();
+
+                var img = new Image();
+                img.src = "images/enfeinada.jpg";
+                img.onload = function() {
+                    ctx.drawImage(this, 0, 20);
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

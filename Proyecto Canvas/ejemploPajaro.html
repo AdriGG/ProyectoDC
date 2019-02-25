@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Pajaro</title>
+</head>
+
+<body>
+    <canvas width="250" height="240" id="lienzo1">Su navegador no soporta canvas :( </canvas>
+    <script type="application/javascript">
+        var canvas1 = document.getElementById("lienzo1");
+        if (canvas1 && canvas1.getContext) {
+            var ctx1 = canvas1.getContext("2d");
+            if (ctx1) {
+                //cola
+                ctx1.beginPath();
+                ctx1.fillStyle = "#fcc";
+                ctx1.moveTo(165, 175);
+                ctx1.lineTo(210, 168);
+                ctx1.lineTo(180, 140);
+                ctx1.fill();
+                // pico
+                ctx1.beginPath();
+                ctx1.fillStyle = "#f90";
+                ctx1.moveTo(35, 95);
+                ctx1.lineTo(70, 85);
+                ctx1.lineTo(57, 110);
+                ctx1.fill();
+                //patas
+                ctx1.beginPath();
+                ctx1.fillStyle = "#cc9";
+                ctx1.moveTo(125, 185);
+                ctx1.lineTo(125, 215);
+                ctx1.lineTo(140, 180);
+                ctx1.lineTo(140, 215);
+                ctx1.lineTo(155, 177);
+                ctx1.fill();
+
+                var cX = ctx1.canvas.width / 2;
+                var cY = ctx1.canvas.height / 2;
+                var r = 70;
+
+                // cuerpo
+                ctx1.beginPath();
+                ctx1.fillStyle = "#ccc";
+                ctx1.arc(cX, cY, r, 0, 2 * Math.PI);
+                ctx1.fill();
+
+                //globalCompositeOperation en lugar de clip
+                ctx1.globalCompositeOperation = "source-atop";
+
+                // barriga  			 
+                ctx1.beginPath();
+                ctx1.fillStyle = "#cc9";
+                ctx1.arc(125, 180, r, 0, 2 * Math.PI);
+                ctx1.fill();
+                // ala
+                ctx1.beginPath();
+                ctx1.fillStyle = "#fcc";
+                ctx1.arc(180, 105, r, 0, 2 * Math.PI);
+                ctx1.fill();
+                // ojo
+                ctx1.beginPath();
+                ctx1.fillStyle = "#000";
+                ctx1.arc(90, 90, 4, 0, 2 * Math.PI);
+                ctx1.fill();
+                ctx1.beginPath();
+                ctx1.fillStyle = "#eee";
+                ctx1.arc(90, 90, 2, 0, 2 * Math.PI);
+                ctx1.fill();
+            }
+        }
+
+    </script>
+</body>
+
+</html>

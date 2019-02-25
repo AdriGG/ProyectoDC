@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Trazado</title>
+    <script type="application/javascript">
+        function draw() {
+            //buscar el Elemento Canvas
+            var canvas = document.getElementById('canvas');
+            if (canvas.getContext) {
+                //Crear un objeto para dibujar
+                var ctx = canvas.getContext('2d');
+                //Dibujar en el Canvas Objeto 1
+                ctx.fillStyle = 'rgb(200, 0, 0)';
+                //Esquina superior izquierda (desplazado 10 pixeles ) y dibuja un cuadrado de 50x50 px  
+                ctx.fillRect(10, 10, 50, 50);
+                //Dibujar en el Canvas Objeto 2  
+                ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
+                ctx.fillRect(30, 30, 50, 50);
+            }
+        }
+
+    </script>
+</head>
+
+<body onload="draw();">
+    <canvas id="canvas" width="150" height="150">Tu navegador no soporta Canvas</canvas>
+</body>
+
+</html>

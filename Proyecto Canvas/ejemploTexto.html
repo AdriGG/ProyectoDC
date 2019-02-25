@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Texto sombreado</title>
+
+</head>
+
+<body>
+    <canvas id="lienzo" width="250" height="200" style="border: 1px solid blue">Su navegador no soporta canvas :( </canvas>
+    <script>
+        var canvas = document.getElementById("lienzo");
+        if (canvas && canvas.getContext) {
+            var ctx = canvas.getContext("2d");
+            if (ctx) {
+                var text = "Las Tres Mellizas";
+                ctx.font = "20pt Comic Sans MS";
+                ctx.textAlign = "center";
+                ctx.fillStyle = "blue";
+                // dibuja el texto
+                ctx.fillText(text, canvas.width / 2, (canvas.height / 2) - 2);
+                // translada el contexto en el centro del canvas
+                ctx.translate(canvas.width / 2, (canvas.height / 2) + 2);
+                // voltea horizontalmente  el contexto 
+                // el segundo parámetro de scale es un número negativo
+                ctx.scale(1, -1);
+                // transparencia
+                ctx.globalAlpha = 0.1;
+                // dibuja de nuevo el texto
+                ctx.fillText(text, 0, 0);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

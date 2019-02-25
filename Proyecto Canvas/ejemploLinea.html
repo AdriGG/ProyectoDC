@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Lineas</title>
+
+</head>
+
+<body>
+    <canvas id="canvas" width="250" height="200">Su navegador no soporta canvas :( </canvas>
+    <script>
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+        var cw = canvas.width = 300;
+        var ch = canvas.height = 200;
+        var cx = cw / 2,
+            cy = ch / 2;
+        //Determinar color de línea
+        context.strokeStyle = "red"
+
+        var offset = 0;
+
+        function dibujarRectangulo() {
+            context.clearRect(0, 0, cw, ch);
+            //Crear línea discontinua
+            context.setLineDash([4, 4]);
+            //especifica el desplazamiento ( offset ) inicial
+            context.lineDashOffset = -offset;
+            //Dibujar rectangulo
+            context.strokeRect(cx - 50, cy - 50, 100, 100);
+        }
+
+        function Animacion() {
+            offset += .5;
+            if (offset > 8) {
+                offset = 0;
+            }
+            dibujarRectangulo();
+            requestId = window.requestAnimationFrame(Animacion);
+        }
+
+        requestId = window.requestAnimationFrame(Animacion);
+        
+    </script>
+</body>
+
+</html>

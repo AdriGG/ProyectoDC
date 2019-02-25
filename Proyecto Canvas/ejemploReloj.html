@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Reloj</title>
+
+</head>
+
+<body>
+
+    <canvas id="canvas" width="400" height="400" style="background-color:#333">
+        Su navegador no soporta canvas :(
+    </canvas>
+
+    <script>
+        //Crear objeto canvas
+        var canvas = document.getElementById("canvas");
+        //Crear objeto en 2d para dibujar
+        var ctx = canvas.getContext("2d");
+        //Radio del reloj a partir de la altura del canvas
+        var radius = canvas.height / 2;
+        //Colocar la posición (0,0)(del objeto dibujado) al centro del canvas:
+        ctx.translate(radius, radius);
+        //Reduce el radio del reloj (al 90%) para dibujar el reloj dentro del canvas:
+        radius = radius * 0.90
+        //LLamar a la función reloj cada 1000 ms
+        setInterval(drawClock, 1000);
+        //Crear función para dibujar el reloj
+        function drawClock() {
+            drawFace(ctx, radius);
+            drawNumbers(ctx, radius);
+            drawTime(ctx, radius);
+        }
+        //Crear función para dibujar la cara del reloj
+        function drawFace(ctx, radius) {
+            var grad;
+            //Circulo blanco    
+            ctx.beginPath();
+            ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = 'white';
+            //Rellena el circulo
+            ctx.fill();
+            //Crear gradiente radial (95% y 105% del radio original):
+            grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
+            /*Crear 3 color stops(Especifica los colores y la posición donde para el gradiente.), correspondiente con el centro, medio y borde exterior del arco.(Crea un efecto 3D) */
+            grad.addColorStop(0, '#333');
+            grad.addColorStop(0.5, 'white');
+            grad.addColorStop(1, '#333');
+            //Define el gradiente como el estilo de linea del objeto dibujado.
+            ctx.strokeStyle = grad;
+            //Define el ancho de linea del objeto dibujado (10% del radio):
+            ctx.lineWidth = radius * 0.1;
+            //Dibujar circulo
+            ctx.stroke();
+            //Dibujar centro del reloj
+            ctx.beginPath();
+            ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
+            ctx.fillStyle = '#333';
+            ctx.fill();
+        }
+        //Crear una función para dibujar los números del reloj
+        function drawNumbers(ctx, radius) {
+            var ang;
+            var num;
+            //Establecer tamaño de la fuente (del objeto dibujado) al 15% del radio:
+            ctx.font = radius * 0.15 + "px arial";
+            //Establecer la alineación vertical del texto al medio y el centro de la posición:
+            ctx.textBaseline = "middle";
+            ctx.textAlign = "center";
+            //Calcular la posición a imprimir (para 12 números) al 85% del radio rotando (PI/6) por cada número:
+            for (num = 1; num < 13; num++) {
+                ang = num * Math.PI / 6;
+                ctx.rotate(ang);
+                ctx.translate(0, -radius * 0.85);
+                ctx.rotate(-ang);
+                ctx.fillText(num.toString(), 0, 0);
+                ctx.rotate(ang);
+                ctx.translate(0, radius * 0.85);
+                ctx.rotate(-ang);
+            }
+        }
+        //Crear función para dibujar el tiempo
+        function drawTime(ctx, radius) {
+            var now = new Date();
+            var hour = now.getHours();
+            var minute = now.getMinutes();
+            var second = now.getSeconds();
+            //Calcular el angulo de la manilla de las horas, y dibuja una longitud (50% del radio), y un ancho (7% del radio):
+            hour = hour % 12;
+            hour = (hour * Math.PI / 6) + (minute * Math.PI / (6 * 60)) + (second * Math.PI / (360 * 60));
+            drawHand(ctx, hour, radius * 0.5, radius * 0.07);
+            //minute
+            minute = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));
+            drawHand(ctx, minute, radius * 0.8, radius * 0.07);
+            // second
+            second = (second * Math.PI / 30);
+            drawHand(ctx, second, radius * 0.9, radius * 0.02);
+        }
+
+        function drawHand(ctx, pos, length, width) {
+            ctx.beginPath();
+            ctx.lineWidth = width;
+            ctx.lineCap = "round";
+            ctx.moveTo(0, 0);
+            ctx.rotate(pos);
+            ctx.lineTo(0, -length);
+            ctx.stroke();
+            ctx.rotate(-pos);
+        }
+
+    </script>
+
+</body>
+
+</html>

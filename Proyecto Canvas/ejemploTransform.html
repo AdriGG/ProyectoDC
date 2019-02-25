@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Transform</title>
+
+</head>
+
+<body>
+
+    <canvas id="c" width="300" height="150">
+        Su navegador no soporta canvas :(
+    </canvas>
+
+    <script>
+        var c = document.getElementById("c");
+        var ctx = c.getContext("2d");
+        ctx.fillStyle = "red";
+        ctx.fillRect(0, 0, 50, 50)
+
+        var sx = Math.PI / 6; // la deformación horizontal: un ángulo en radianes
+        var sy = 0; // la deformación vertical, nula en este caso
+        ctx.transform(1, sx, sy, 1, 0, 0);
+        ctx.fillStyle = "orange";
+        ctx.fillRect(130, -20, 50, 50);
+
+    </script>
+
+</body>
+
+</html>
